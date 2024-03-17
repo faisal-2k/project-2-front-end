@@ -4,12 +4,13 @@ import auth from '../../firebase.init';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
+import createUserInDB from './createUserInDB';
 
 const Login = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-  const [signInWithFacebook, user, loading, fError] = useSignInWithFacebook(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  // const [signInWithFacebook, user, loading, fError] = useSignInWithFacebook(auth);
   const [signInWithEmailAndPassword, eUser, eLoading, cError] = useSignInWithEmailAndPassword(auth);
-  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
+  // const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 //   const [token] = useIdToken(gUser || eUser);
 
@@ -18,24 +19,23 @@ const Login = () => {
 
 
   const handleFormSubmit = data =>{  
-    signInWithEmailAndPassword(data.email, data.password);    
-    };  
+    signInWithEmailAndPassword(data.email, data.password); 
+  };  
 
     
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    // useEffect(()=> {
-    //   if(token){
-    //     navigate(from, { replace: true });
-    //   }
-    // } ,[token])
     if(eLoading || gLoading ){
       return <Loading></Loading>
   }
 
     if(existingUser){
+      if(existingUser.email){
+        const d = {'name':existingUser?.displayName, 'email':existingUser?.email}
+        createUserInDB(d);
+      } 
       return <div className='min-h-screen flex justify-center items-center text-left'>
         <p className='text-3xl'>Welcome Back, <span className='text-primary'>{existingUser.displayName}</span>!</p>
       </div>

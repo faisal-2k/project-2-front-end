@@ -4,10 +4,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useForm } from 'react-hook-form';
 import Loading from '../../components/Loading';
+import createUserInDB from './createUserInDB';
 
 const Signup = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    const [signInWithFacebook, user, loading, fError] = useSignInWithFacebook(auth);
+    // const [signInWithFacebook, user, loading, fError] = useSignInWithFacebook(auth);
     const [createUserWithEmailAndPassword, eUser, eLoading, eError] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, error] = useUpdateProfile(auth);
 
@@ -20,16 +21,16 @@ const Signup = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
     
-    // useEffect(()=> {
-    //   if(token){
-    //     navigate(from, { replace: true });
-    //   }
-    // } ,[token])
+
 
   if(eLoading || gLoading || updating ){
       return <Loading></Loading>
   }
   if(existingUser){
+    if(existingUser.email){
+      const d = {'name':existingUser?.displayName, 'email':existingUser?.email}
+      createUserInDB(d);
+    }
     return <div className='min-h-screen flex justify-center items-center'>
       <p className='text-3xl'>Welcome <span className='text-primary'>{existingUser.displayName}</span>!</p>
     </div>
@@ -39,7 +40,8 @@ const Signup = () => {
       const displayName = data.name;     
       await createUserWithEmailAndPassword(data.email, data.password);
       await updateProfile({displayName});
-    
+      const d = { 'name': data.name, 'email': data.email };
+      createUserInDB(d); 
     };    
   
 

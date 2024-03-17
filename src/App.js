@@ -12,6 +12,8 @@ import SalaryRecord from './pages/Dashboard/General/SalaryRecord';
 import ApplyForLeave from './pages/Dashboard/General/ApplyForLeave';
 import EmployeeList from './pages/Dashboard/Manager/EmployeeList';
 import AddEmployee from './pages/Dashboard/Manager/AddEmployee';
+import ReqiureAuth from './pages/Login/RequireAuth';
+import RequireManager from './pages/Login/RequireManager';
 // import ReqiureAuth from './pages/Login/RequireAuth';
 // import RequireAdmin from './pages/Login/RequireAdmin';
 
@@ -21,12 +23,12 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home/>}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}></Route>
-        <Route path='/salary-record' element={<SalaryRecord/>}></Route>
-        <Route path='/apply-for-a-leave' element={<ApplyForLeave/>}></Route>
-        <Route path='/employee-list' element={<EmployeeList/>}></Route>
-        <Route path='/add-new-employee' element={<AddEmployee/>}></Route>
-        <Route path='/profile' element={<Profile/>}></Route>
+        <Route path='/dashboard' element={<ReqiureAuth><Dashboard/></ReqiureAuth>}></Route>
+        <Route path='/salary-record' element={<ReqiureAuth><SalaryRecord/></ReqiureAuth>}></Route>
+        <Route path='/apply-for-a-leave' element={<ReqiureAuth><ApplyForLeave/></ReqiureAuth>}></Route>
+        <Route path='/employee-list' element={<ReqiureAuth><RequireManager><EmployeeList/></RequireManager></ReqiureAuth>}></Route>
+        <Route path='/add-new-employee' element={<ReqiureAuth><RequireManager><AddEmployee/></RequireManager></ReqiureAuth>}></Route>
+        <Route path='/profile' element={<ReqiureAuth><Profile/></ReqiureAuth>}></Route>
         <Route path='/about' element={<About/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>

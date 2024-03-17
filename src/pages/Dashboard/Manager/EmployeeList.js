@@ -17,7 +17,7 @@ const params = useParams();
   let searchName = '';
   const getEmployeeList = async (searchName) => {
     try {
-      const { data } = await axios.get(`/dummy_json_files/stc.json`);
+      const { data } = await axios.get(`https://pay-manager-back-end.onrender.com/employees/`);
       return data;
       // Handle data as needed
     } catch (error) {

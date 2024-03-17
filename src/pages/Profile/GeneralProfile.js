@@ -1,12 +1,38 @@
 import React from 'react';
 import profile from '../../assests/cliparts/profile_clipart_2.png'
 import { useForm } from 'react-hook-form';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import axios from 'axios';
 
-const GeneralProfile = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+const GeneralProfile =  () => {
+    const [user, loading, error] = useAuthState(auth);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const update_profile = e => {
-        console.log('profile updating');
+    const update_profile = async e => {
+        const data = {
+        "account_no": e.account,
+        "bank": e.bank,
+        "company" : e.company,
+        "email" : e.email,
+        "name" : e.full_name,
+        "phone" : e.phone,
+        "balance" : 0,
+        "salary" : 0,
+        "salary_status" : "due",
+        "salary_data" : {"year":2024, "data":[0,0,0,0,0,0,0,0,0,0,0,0]},
+        "monthly_leave" : 2,
+        "employee_id":123,
+        "applicaiton_id":parseInt(e.id),
+        "total_leave":1,
+        }
+
+        try{
+            await axios.post(`https://pay-manager-back-end.onrender.com/employees/create`, data)
+            reset();
+        } catch{
+            console.log("Error");
+        }
   }
 
     return (
@@ -24,10 +50,19 @@ const GeneralProfile = () => {
 
                        <div className="form-control">
                             <label className="label">
+                            <span className="label-text">Employee ID</span>
+                            </label>
+                            <div className="mb-3 ">
+                                <input type="number" placeholder="id" className="input input-bordered w-full max-w-xs"   {...register("id", { required: true })} />
+                                <p className="text-red-500">{errors.id?.type === 'required' && "id is required"}</p>
+                            </div>
+                        </div>
+                       <div className="form-control">
+                            <label className="label">
                             <span className="label-text">Full Name</span>
                             </label>
                             <div className="mb-3 ">
-                                <input type="text" placeholder="Abdullah" className="input input-bordered w-full max-w-xs"  {...register("full_name", { required: true })} />
+                                <input type="text" placeholder="Abdullah" className="input input-bordered w-full max-w-xs" value={user.displayName}  {...register("full_name", { required: true })} />
                                 <p className="text-red-500">{errors.full_name?.type === 'required' && "Name is required"}</p>
                             </div>
                         </div>
@@ -36,7 +71,7 @@ const GeneralProfile = () => {
                             <span className="label-text">Email</span>
                             </label>
                             <div className="mb-3">
-                                <input type="email" placeholder="Email" className="input input-bordered w-full max-w-xs"  {...register("email", { required: true })} />
+                                <input type="email" placeholder="Email" className="input input-bordered w-full max-w-xs" value={user.email}  {...register("email", { required: true })} />
                                 <p className="text-red-500">{errors.email?.type === 'required' && "Email is required"}</p>
                             </div>
                         </div>

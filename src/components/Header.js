@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import logo from "../assests/logo/project_log.png";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
-import useAdmin from '../hooks/useAdmin';
+import useManager from '../hooks/useManager';
 import { signOut } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header = () => {
     const [user, loading, error] = useAuthState(auth);
-//   const [admin, isLoading] = useAdmin(user);
+    const [manager, isLoading] = useManager(user);
 
 const menu = <>
     <li><Link to={'/'}>Home</Link></li>
@@ -25,6 +25,7 @@ const menu = <>
     }  
     <li><Link to={'/about'}>About</Link></li>        
     </>
+ 
     return (
         <header>
 
@@ -64,30 +65,7 @@ const menu = <>
             </div> 
 
         </header>
-        // <header>
-        //     <div className="navbar bg-base-200 px-10">
-        //         <div className="flex-1">
-        //             <img className='w-10' src={logo} alt="" />
-        //             <Link to={'/'} className="ml-4 text-xl text-lime-600">Pay Manager</Link>
-        //         </div>
-        //         <div className="flex-none justify-center">
-        //             <ul className="menu menu-horizontal px-1  items-center">
-        //             <li><Link to={'/'}>Home</Link></li>
-        //             <li><Link to={'/about'}>About</Link></li>
-        //             { user 
-        //             ?   <div className="dropdown dropdown-hover">
-        //                 <label tabIndex="0" className="btn btn-ghost m-1">{user.displayName}</label>
-        //                 <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-        //                     <li onClick={() => signOut(auth)}><a>Log Out</a></li>
-        //                 </ul>
-        //             </div>
-        //             : 
-        //             <li><Link to={'/login'}>Login</Link></li>
-        //             }                    
-        //             </ul>
-        //         </div>
-        //     </div>
-        // </header>
+        
     );
 };
 
