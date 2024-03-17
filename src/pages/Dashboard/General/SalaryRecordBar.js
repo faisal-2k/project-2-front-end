@@ -1,49 +1,55 @@
-import React, { PureComponent } from 'react';
-// import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React from 'react';
 import bag_of_money from '../../../assests/cliparts/bag_of_money.png'
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const data = [
   {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
+    name: 'JAN',
+    Salary: 2000,    
   },
   {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
+    name: 'FEB',
+    Salary: 1500,    
   },
   {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
+    name: 'MAR',
+    Salary: 2000,    
   },
   {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
+    name: 'APR',
+    Salary: 2500,    
   },
   {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
+    name: 'MAY',
+    Salary: 2000,    
   },
   {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
+    name: 'JUN',
+    Salary: 1000,    
   },
   {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
+    name: 'JUL',
+    Salary: 2000,    
+  },
+  {
+    name: 'AUG',
+    Salary: 1800,    
+  },
+  {
+    name: 'SEP',
+    Salary: 2100,    
+  },
+  {
+    name: 'OCT',
+    Salary: 2300,    
+  },
+  {
+    name: 'NOV',
+    Salary: 1400,    
+  },
+  {
+    name: 'DEC',
+    Salary: 2000,    
   },
 ];
 
@@ -52,19 +58,26 @@ const SalaryRecordBar = () => {
     // static demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
 
     return (
-        <div>
-            <div className=''>
-                <div className='bg-blue-300 p-8 flex justify-around rounded-lg items-center'>
+        <div className='my-10 flex items-center'>
+            <div className='hidden md:block'>
+                <div className='p-8  rounded-lg '>
                     <img className='w-16' src={bag_of_money}/>
-                    <p className='text-2xl'>Salary Record</p>
+                    <p className=''>Salary</p>
+                    <p className=''>2024</p>
                 </div>
             </div>
-            <div>
-            {/* <ResponsiveContainer width="100%" height="100%">
-                <BarChart width={150} height={40} data={data}>
-                    <Bar dataKey="uv" fill="#8884d8" />
+            <div className='my-10 w-full'>       
+
+            <ResponsiveContainer height={300}>
+                <BarChart  data={data}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis type="number" domain={[0, 100]} />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="Salary" fill="#6F2DBD" />
                 </BarChart>
-            </ResponsiveContainer> */}
+            </ResponsiveContainer>
             </div>   
         </div>
     );

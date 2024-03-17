@@ -12,9 +12,9 @@ const GeneralProfile = () => {
     return (
         <div className='mt-10 px-32'>
            <div className='grid grid-cols-1 md:grid-cols-3'>
-                <div className='flex flex-col items-center text-center'>
+                <div className='mx-auto'>
                     <img className='w-32' src={profile}/>
-                    <p>@admin_2</p>
+                  
                 </div>
                 <div className='col-span-2'>
                     <div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import bag_of_money from '../../assests/cliparts/bag_of_money.png'
 import luggage from '../../assests/cliparts/luggage.png'
+import list from '../../assests/icons/list.png'
+import add_employee from '../../assests/icons/add_employee.png'
 import { Link } from 'react-router-dom';
 const Dashboard = () => {
     return (
@@ -17,6 +19,20 @@ const Dashboard = () => {
                 <div className='bg-blue-300 p-8 flex justify-around rounded-lg items-center'>
                     <img className='w-16' src={luggage}/>
                     <p className='text-2xl'>Apply For A Leave</p>
+                </div>
+                </Link>
+
+
+                <Link to='/employee-list'>
+                <div className='bg-green-300 p-8 flex justify-around rounded-lg items-center'>
+                    <img className='w-16' src={list}/>
+                    <p className='text-2xl'>List of employees</p>
+                </div>
+                </Link>
+                <Link to='/add-new-employee'>
+                <div className='bg-green-300 p-8 flex justify-around rounded-lg items-center'>
+                    <img className='w-16' src={add_employee}/>
+                    <p className='text-2xl'>Add New Employee</p>
                 </div>
                 </Link>
              </div>

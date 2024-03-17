@@ -1,0 +1,27 @@
+[
+    {"id": 123, 
+    "name":"yeaser", 
+    "email":"user@mail.com",
+    "phone":"+966501112223",
+    "bank":"al bilad",
+    "account_no":"SA4420000001234567891234",
+    "balance":3000,
+    "salary":1000, 
+    "salary_status":"due",
+    "salary_data":{"year":2024, "data":[300,500,200,700,600,650,800,300,400,500,1200,900]},
+    "monthly_leave":2
+    },
+    {"id": 124, 
+    "name":"fahad", 
+    "email":"user@mail.com",
+    "phone":"+966501112223",
+    "bank":"al bilad",
+    "account_no":"SA4420000001234567891234",
+    "balance":3000,
+    "salary":2500, 
+    "salary_status":"paid",
+    "salary_data":{"year":2024, "data":[1000,1600,1800,2000,1700,1450,1600,1700,1620,700,200,0]},
+    "monthly_leave":2,
+    "role":"manager"
+    }
+]

@@ -10,6 +10,8 @@ import Profile from './pages/Profile/Profile';
 import Dashboard from './pages/Dashboard/Dashboard';
 import SalaryRecord from './pages/Dashboard/General/SalaryRecord';
 import ApplyForLeave from './pages/Dashboard/General/ApplyForLeave';
+import EmployeeList from './pages/Dashboard/Manager/EmployeeList';
+import AddEmployee from './pages/Dashboard/Manager/AddEmployee';
 // import ReqiureAuth from './pages/Login/RequireAuth';
 // import RequireAdmin from './pages/Login/RequireAdmin';
 
@@ -22,6 +24,8 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/salary-record' element={<SalaryRecord/>}></Route>
         <Route path='/apply-for-a-leave' element={<ApplyForLeave/>}></Route>
+        <Route path='/employee-list' element={<EmployeeList/>}></Route>
+        <Route path='/add-new-employee' element={<AddEmployee/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/about' element={<About/>}></Route>
         <Route path='/login' element={<Login/>}></Route>

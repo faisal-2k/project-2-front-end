@@ -1,6 +1,7 @@
 import React from 'react';
 import balance_icon from '../../../assests/icons/balance.png'
 import withdraw from '../../../assests/icons/withdraw.png'
+import SalaryRecordBar from './SalaryRecordBar';
 
 const SalaryRecord = () => {
     return (
@@ -28,7 +29,7 @@ const SalaryRecord = () => {
                     </div>
                 </div>
             </div>
-            <SalaryRecord></SalaryRecord>
+            <SalaryRecordBar></SalaryRecordBar>
         </div>
     );
 };
