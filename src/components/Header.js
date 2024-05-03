@@ -20,10 +20,11 @@ const menu = <>
     
         </>  
     : <>
-    <li><Link to="/">Services</Link></li>      
+    <li><Link to="/services">Services</Link></li>      
     </>
     }  
     <li><Link to={'/about'}>About</Link></li>        
+    <li><Link to={'/faqs'}>FAQs</Link></li>        
     </>
  
     return (

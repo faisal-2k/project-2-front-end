@@ -8,9 +8,7 @@ import createUserInDB from './createUserInDB';
 
 const Login = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-  // const [signInWithFacebook, user, loading, fError] = useSignInWithFacebook(auth);
   const [signInWithEmailAndPassword, eUser, eLoading, cError] = useSignInWithEmailAndPassword(auth);
-  // const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 //   const [token] = useIdToken(gUser || eUser);
 

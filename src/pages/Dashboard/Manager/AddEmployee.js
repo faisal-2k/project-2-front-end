@@ -61,7 +61,7 @@ const AddEmployee = () => {
                                 <span className="label-text">Full Name</span>
                                 </label>
                                 <div className="mb-3 ">
-                                    <input type="text" placeholder="Abdullah" className="input input-bordered w-full max-w-xs" value={user.displayName}  {...register("full_name", { required: true })} />
+                                    <input type="text" placeholder="Abdullah" className="input input-bordered w-full max-w-xs"  {...register("full_name", { required: true })} />
                                     <p className="text-red-500">{errors.full_name?.type === 'required' && "Name is required"}</p>
                                 </div>
                             </div>

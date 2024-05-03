@@ -14,6 +14,10 @@ import EmployeeList from './pages/Dashboard/Manager/EmployeeList';
 import AddEmployee from './pages/Dashboard/Manager/AddEmployee';
 import ReqiureAuth from './pages/Login/RequireAuth';
 import RequireManager from './pages/Login/RequireManager';
+import NotFoundPage from './pages/NotFoundPage';
+import FAQs from './pages/FAQs';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
 // import ReqiureAuth from './pages/Login/RequireAuth';
 // import RequireAdmin from './pages/Login/RequireAdmin';
 
@@ -29,9 +33,13 @@ function App() {
         <Route path='/employee-list' element={<ReqiureAuth><RequireManager><EmployeeList/></RequireManager></ReqiureAuth>}></Route>
         <Route path='/add-new-employee' element={<ReqiureAuth><RequireManager><AddEmployee/></RequireManager></ReqiureAuth>}></Route>
         <Route path='/profile' element={<ReqiureAuth><Profile/></ReqiureAuth>}></Route>
+        <Route path='/services' element={<Services/>}></Route>
         <Route path='/about' element={<About/>}></Route>
+        <Route path='/faqs' element={<FAQs/>}></Route>
+        <Route path='/contact' element={<Contact/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>
+        <Route path='/*' element={<NotFoundPage/>}></Route>
 
         {/* <ReqiureAuth><RequireAdmin>a</RequireAdmin></ReqiureAuth> */}
       </Routes>

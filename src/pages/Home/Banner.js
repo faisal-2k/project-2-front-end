@@ -19,7 +19,7 @@ const Banner = () => {
 </p>
             </div>          
         
-        <Link className='inline-block mt-12 px-10 py-3 bg-lime-400 rounded-md' to=''>Explore <FontAwesomeIcon className='ml-4' icon={faArrowRight} /></Link>
+        <Link className='inline-block mt-12 px-10 py-3 bg-lime-400 rounded-md' to='/services'>Explore <FontAwesomeIcon className='ml-4' icon={faArrowRight} /></Link>
         </div>
         </section>
     );

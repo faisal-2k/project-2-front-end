@@ -8,7 +8,6 @@ import createUserInDB from './createUserInDB';
 
 const Signup = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    // const [signInWithFacebook, user, loading, fError] = useSignInWithFacebook(auth);
     const [createUserWithEmailAndPassword, eUser, eLoading, eError] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, error] = useUpdateProfile(auth);
 
