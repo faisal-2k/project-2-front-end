@@ -1,12 +1,16 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import profile from '../../../assests/cliparts/profile_clipart.png'
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import axios from 'axios';
-const AddEmployee = () => {
-    const [user, loading, error] = useAuthState(auth);
+import { useForm } from 'react-hook-form';
+import profile from '../../../assests/cliparts/profile_clipart.png'
+import { useLocation, useNavigate } from 'react-router-dom';
+
+
+const UpdateEmployee = () => {
+    const [person, sePerson] = useState();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    
 
     const create_employee = async e => {
         const data = {
@@ -26,19 +30,19 @@ const AddEmployee = () => {
         "total_leave":1,
         }
 
-        try{
-            const headers = {                
-                authenticator: `Bearer ${localStorage.getItem('accessToken')}`                
-            };
-            await axios.post(`https://pay-manager-back-end.onrender.com/employees/create`, data, { headers: headers })
-            reset();
-        } catch{
-            console.log("Error");
-        }
+        // try{
+        //     const headers = {                
+        //         authenticator: `Bearer ${localStorage.getItem('accessToken')}`                
+        //     };
+        //     await axios.post(`https://pay-manager-back-end.onrender.com/employees/create`, data, { headers: headers })
+        //     reset();
+        // } catch{
+        //     console.log("Error");
+        // }
   }
     return (
         <div className='Page mb-48'>
-            <p className='my-10'>Add New Employee</p>
+            <p className='my-10'>Update Employee</p>
             <div className='mt-10 px-32'>
            <div className='grid grid-cols-1 md:grid-cols-3'>
                 <div className='mx-auto'>
@@ -131,4 +135,4 @@ const AddEmployee = () => {
     );
 };
 
-export default AddEmployee;
+export default UpdateEmployee;

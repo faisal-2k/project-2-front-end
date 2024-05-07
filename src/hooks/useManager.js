@@ -6,7 +6,8 @@ const useManager = (user) => {
     const [isLoading, setIsLoading] = useState(true);
     
     useEffect(()=> {
-        const userEmail = user?.email;       
+        const userEmail = user?.email;
+              
         if(userEmail){                       
             axios.get(`https://pay-manager-back-end.onrender.com/users/ismanager/${userEmail}`)
             .then(response => {

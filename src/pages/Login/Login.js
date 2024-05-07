@@ -5,19 +5,20 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import createUserInDB from './createUserInDB';
+import useToken from '../../hooks/useToken';
+import requestToken from './requestToken';
 
 const Login = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [signInWithEmailAndPassword, eUser, eLoading, cError] = useSignInWithEmailAndPassword(auth);
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-//   const [token] = useIdToken(gUser || eUser);
 
   const [existingUser] = useAuthState(auth);
 
 
 
   const handleFormSubmit = data =>{  
-    signInWithEmailAndPassword(data.email, data.password); 
+    signInWithEmailAndPassword(data.email, data.password);
   };  
 
     
@@ -30,10 +31,11 @@ const Login = () => {
   }
 
     if(existingUser){
-      if(existingUser.email){
-        const d = {'name':existingUser?.displayName, 'email':existingUser?.email}
-        createUserInDB(d);
-      } 
+      // if(existingUser.email){
+      //   const d = {'name':existingUser?.displayName, 'email':existingUser?.email}
+      //   createUserInDB(d);
+      // } 
+      requestToken();
       return <div className='min-h-screen flex justify-center items-center text-left'>
         <p className='text-3xl'>Welcome Back, <span className='text-primary'>{existingUser.displayName}</span>!</p>
       </div>

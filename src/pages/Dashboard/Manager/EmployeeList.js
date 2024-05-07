@@ -8,7 +8,7 @@ import axios from 'axios';
 import EmployeeRow from './EmployeeRow';
 
 const EmployeeList = () => {
-    const [user, loading, error] = useAuthState(auth);
+    
 //   const [admin, isLoadingAdmin] = useAdmin(user);
 
 const params = useParams();
@@ -17,7 +17,12 @@ const params = useParams();
   let searchName = '';
   const getEmployeeList = async (searchName) => {
     try {
-      const { data } = await axios.get(`https://pay-manager-back-end.onrender.com/employees/`);
+      const headers = {
+        headers: {
+          authenticator: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      };
+      const { data } = await axios.get(`https://pay-manager-back-end.onrender.com/employees/`, headers);
       return data;
       // Handle data as needed
     } catch (error) {
@@ -31,7 +36,6 @@ const {isLoading, isFetching, data: employees, refetch} = useQuery('employee_lis
 if(isLoading){
   return <Loading></Loading>
 }
-
 if(employees?.length === 0){
   return <div className='min-h-screen flex justify-center items-center'>
             <p className="text-center text-2xl my-5">No Result Found</p>
@@ -74,6 +78,7 @@ const searchByName = e => {
         <tr className=''>
             <th>ID</th>
             <th>Name</th>
+            <th>Update</th>
             <th>Salary</th>
             <th>Status</th>
             <th className='text-center'>Action</th>

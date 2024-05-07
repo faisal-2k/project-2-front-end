@@ -5,6 +5,8 @@ import auth from '../../firebase.init';
 import { useForm } from 'react-hook-form';
 import Loading from '../../components/Loading';
 import createUserInDB from './createUserInDB';
+import requestToken from './requestToken';
+
 
 const Signup = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -12,8 +14,7 @@ const Signup = () => {
     const [updateProfile, updating, error] = useUpdateProfile(auth);
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    // const [token] = useToken(gUser || eUser);
-    const [existingUser] = useAuthState(auth);
+    const [newUser] = useAuthState(auth);
 
 
     const navigate = useNavigate();
@@ -25,13 +26,13 @@ const Signup = () => {
   if(eLoading || gLoading || updating ){
       return <Loading></Loading>
   }
-  if(existingUser){
-    if(existingUser.email){
-      const d = {'name':existingUser?.displayName, 'email':existingUser?.email}
+  if(newUser){
+    if(newUser.email){
+      const d = {'name':newUser?.displayName, 'email':newUser?.email}
       createUserInDB(d);
     }
     return <div className='min-h-screen flex justify-center items-center'>
-      <p className='text-3xl'>Welcome <span className='text-primary'>{existingUser.displayName}</span>!</p>
+      <p className='text-3xl'>Welcome <span className='text-primary'>{newUser.displayName}</span>!</p>
     </div>
   }
   
@@ -41,6 +42,7 @@ const Signup = () => {
       await updateProfile({displayName});
       const d = { 'name': data.name, 'email': data.email };
       createUserInDB(d); 
+      requestToken();
     };    
   
 

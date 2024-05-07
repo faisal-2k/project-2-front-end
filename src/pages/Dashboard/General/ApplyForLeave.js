@@ -1,12 +1,32 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const ApplyForLeave = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
+    const [completed, setCompleted] = useState(false);
+    const [count, setCount] = useState(0);
 
-    const apply_for_leave = e => {
-        console.log('profile updating', e);
+    const getCount = async() => {
+        const count_data = await axios.get(`https://pay-manager-back-end.onrender.com/applications/count`)
+        setCount(parseInt(count_data.data.result));
+        return count_data
+    }
+
+    const apply_for_leave = async e => {
+        const data = {
+            "applcation_id":count+1,
+            "subject":e.subject,
+            "application":e.application,
+            "start_date":e.state_date,
+            "end_date":e.end_date,
+        }
+        await axios.post(`https://pay-manager-back-end.onrender.com/applications/create`, data)
+        .then(reset())
   }
+  getCount()
+  const startDate = watch("start_date");
+  const endDate = watch("end_date");
 
     return (
         <div className='Page mb-48'>
@@ -34,19 +54,26 @@ const ApplyForLeave = () => {
                             </div>
                         </div>
 
-                        <p>Start Date</p>
-                       <div className="form-control text-left">                            
+                       
+                            <p>Start Date</p>
+                            <div className="form-control text-left">
                             <div className="mb-3">
-                                <input type="date" placeholder="" className="input input-bordered w-full max-w-xs"  {...register("start_date")} />
+                                <input type="date" placeholder="" className="input input-bordered w-full max-w-xs" {...register("start_date", { required: "Start date is required" })} />
+                                {errors.start_date && <span className="text-red-500">{errors.start_date.message}</span>}
                             </div>
-                        </div>
+                            </div>
 
-                        <p>End Date</p>                           
-                       <div className="form-control text-left">                            
+                            <p>End Date</p>
+                            <div className="form-control text-left">
                             <div className="">
-                                <input type="date" placeholder="" className="input input-bordered w-full max-w-xs"  {...register("end_date")} />
+                                <input type="date" placeholder="" className="input input-bordered w-full max-w-xs" {...register("end_date", { required: "End date is required", validate: value => value > startDate || "End date must be after start date" })} />
+                                {errors.end_date && <span className="text-red-500">{errors.end_date.message}</span>}
                             </div>
-                        </div>
+                            </div>
+
+                            {endDate && startDate && (new Date(endDate) - new Date(startDate)) > 2 * 24 * 60 * 60 * 1000 && (
+                            <p className="text-red-500">Total days can't be more than 2 days</p>
+                            )}                        
                       
                         
 

@@ -3,13 +3,19 @@ import bag_of_money from '../../assests/cliparts/bag_of_money.png'
 import luggage from '../../assests/cliparts/luggage.png'
 import list from '../../assests/icons/list.png'
 import add_employee from '../../assests/icons/add_employee.png'
+import files from '../../assests/icons/files.png'
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import useManager from '../../hooks/useManager';
+import Loading from '../../components/Loading';
 const Dashboard = () => {
     const [user, loading, error] = useAuthState(auth);
     const [manager, isLoading] = useManager(user);
+    
+    if(loading || isLoading){
+        return <Loading></Loading>
+    }
     return (
         <div className='Page px-32'>
              <p className='mt-10'>Welcome to dashboard</p>
@@ -40,6 +46,12 @@ const Dashboard = () => {
                 <div className='bg-green-300 p-8 flex justify-around rounded-lg items-center'>
                     <img className='w-16' src={add_employee}/>
                     <p className='text-2xl'>Add New Employee</p>
+                </div>
+                </Link>
+                <Link to='/applications'>
+                <div className='bg-blue-300 p-8 flex justify-around rounded-lg items-center'>
+                    <img className='w-16' src={files}/>
+                    <p className='text-2xl'>Applications</p>
                 </div>
                 </Link>
 

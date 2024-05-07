@@ -18,6 +18,10 @@ import NotFoundPage from './pages/NotFoundPage';
 import FAQs from './pages/FAQs';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import Pay from './pages/Pay/Pay';
+import UpdateEmployee from './pages/Dashboard/Manager/UpdateEmployee';
+import ApplicationList from './pages/Applications/ApplicationList';
+import Withdraw from './pages/Dashboard/General/Withdraw';
 // import ReqiureAuth from './pages/Login/RequireAuth';
 // import RequireAdmin from './pages/Login/RequireAdmin';
 
@@ -32,10 +36,16 @@ function App() {
         <Route path='/apply-for-a-leave' element={<ReqiureAuth><ApplyForLeave/></ReqiureAuth>}></Route>
         <Route path='/employee-list' element={<ReqiureAuth><RequireManager><EmployeeList/></RequireManager></ReqiureAuth>}></Route>
         <Route path='/add-new-employee' element={<ReqiureAuth><RequireManager><AddEmployee/></RequireManager></ReqiureAuth>}></Route>
+        <Route path='/update-employee' element={<ReqiureAuth><RequireManager><UpdateEmployee/></RequireManager></ReqiureAuth>}></Route>
+        <Route path='/applications' element={<ReqiureAuth><RequireManager><ApplicationList/></RequireManager></ReqiureAuth>}></Route>
+        <Route path='/withdraw' element={<ReqiureAuth><Withdraw/></ReqiureAuth>}></Route>
         <Route path='/profile' element={<ReqiureAuth><Profile/></ReqiureAuth>}></Route>
         <Route path='/services' element={<Services/>}></Route>
+        <Route path='/pay/:id' element={<Pay/>}></Route>
         <Route path='/about' element={<About/>}></Route>
+      
         <Route path='/faqs' element={<FAQs/>}></Route>
+
         <Route path='/contact' element={<Contact/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>
